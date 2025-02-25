@@ -1,35 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'screens/home_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/register_screen.dart';
-import 'services/auth_service.dart';
+import 'view/home_screen.dart';
+import 'view/inicio_vista.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthService()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Banca Móvil',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => LoginScreen(),
-          '/home': (context) => HomeScreen(),
-          '/register': (context) => RegisterScreen(),
-        },
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false, // Desactiva la etiqueta "Debug"
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: HomeScreen(),
     );
   }
 }

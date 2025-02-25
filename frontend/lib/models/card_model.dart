@@ -1,22 +1,50 @@
-// Modelo de Tarjeta
 class CardModel {
-  final int id;
-  final int userId;
+  final String id;
+  final String userId;
   final String cardNumber;
-  final bool isFrozen;
+  final String cardHolder;
   final String expirationDate;
-  final String cardType;
+  final bool isFrozen;
 
-  CardModel({required this.id, required this.userId, required this.cardNumber, required this.isFrozen, required this.expirationDate, required this.cardType});
+  CardModel({
+    required this.id,
+    required this.userId,
+    required this.cardNumber,
+    required this.cardHolder,
+    required this.expirationDate,
+    required this.isFrozen,
+  });
 
   factory CardModel.fromJson(Map<String, dynamic> json) {
     return CardModel(
-      id: json['id'],
-      userId: json['userId'],
+      id: json['id'].toString(),
+      userId: json['userId'].toString(),
       cardNumber: json['cardNumber'],
-      isFrozen: json['isFrozen'],
+      cardHolder: json['cardHolder'],
       expirationDate: json['expirationDate'],
-      cardType: json['cardType'],
+      isFrozen: json['isFrozen'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'userId': userId,
+      'cardNumber': cardNumber,
+      'cardHolder': cardHolder,
+      'expirationDate': expirationDate,
+      'isFrozen': isFrozen,
+    };
+  }
+
+  CardModel copyWith({bool? isFrozen}) {
+    return CardModel(
+      id: id,
+      userId: userId,
+      cardNumber: cardNumber,
+      cardHolder: cardHolder,
+      expirationDate: expirationDate,
+      isFrozen: isFrozen ?? this.isFrozen,
     );
   }
 }
