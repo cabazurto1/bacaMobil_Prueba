@@ -11,7 +11,7 @@ class UserService {
       Uri.parse('$baseUrl/register'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
-        'nombre': user.nombre,  // Se agrega el nombre
+        'nombre': user.nombre,
         'correo': user.correo,
         'password': user.password,
       }),
@@ -41,7 +41,7 @@ class UserService {
   }
 
   // Obtener un usuario por ID
-  Future<UserModel> getUserById(int userId) async {
+  Future<UserModel> getUserById(String userId) async {
     final response = await http.get(Uri.parse('$baseUrl/$userId'));
     if (response.statusCode == 200) {
       return UserModel.fromMap(json.decode(response.body));
@@ -50,26 +50,31 @@ class UserService {
     }
   }
 
-  // Actualizar un usuario incluyendo nombre
-  Future<UserModel> updateUser(int userId, UserModel updatedUser) async {
-    final response = await http.put(
-      Uri.parse('$baseUrl/$userId'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'nombre': updatedUser.nombre, // Se agrega el nombre
-        'correo': updatedUser.correo,
-        'password': updatedUser.password,
-      }),
-    );
-    if (response.statusCode == 200) {
-      return UserModel.fromMap(json.decode(response.body));
-    } else {
-      throw Exception('Error al actualizar usuario: ${response.body}');
+  // ✅ **Actualizar un usuario (Corregido)**
+  Future<UserModel> updateUser(String userId, UserModel updatedUser) async {
+    try {
+      final response = await http.put(
+        Uri.parse('$baseUrl/$userId'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'nombre': updatedUser.nombre,
+          'correo': updatedUser.correo,
+          'password': updatedUser.password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        return UserModel.fromMap(json.decode(response.body));
+      } else {
+        throw Exception('Error al actualizar usuario: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Error en updateUser: $e');
     }
   }
 
   // Eliminar un usuario
-  Future<void> deleteUser(int userId) async {
+  Future<void> deleteUser(String userId) async {
     final response = await http.delete(Uri.parse('$baseUrl/$userId'));
     if (response.statusCode != 200) {
       throw Exception('Error al eliminar usuario: ${response.body}');
