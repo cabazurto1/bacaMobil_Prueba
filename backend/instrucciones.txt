@@ -1,0 +1,13 @@
+FLASK
+1. Abrir en visual la carpeta backend-flask
+2. Crear el entorno con: python -m venv venv
+3. Activar el entorno con: venv/Scripts/activate
+4. Descargar las dependencias con: pip install -r requirements.txt
+5. Correr con: flask --app backend run
+
+Si quieren pueden cambiarle el enlace del MONG URI porque está con mi Mongo Atlas
+
+SPRINGBOOT
+1. Crear la base de datos con Docker corriendo docker-compose up -d, se debe crear un contenedor para la BD en Postgres
+2. Abrir la carpeta backend-springboot en IntelliJ
+3. Correr el archivo BancaMovilApplication.java que está en src/ec/edu/espe/bancaMovil

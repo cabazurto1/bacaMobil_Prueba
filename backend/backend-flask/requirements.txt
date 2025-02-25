@@ -1,0 +1,9 @@
+Flask
+Flask-Cors
+Flask-PyMongo
+pymongo
+dnspython
+bcrypt
+pytest
+flask-testing
+reportlab

@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_banca_movil
+    restart: always
+    environment:
+      POSTGRES_DB: banca_movil
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend-flask:
+    build: ./backend-flask
+    container_name: backend_flask
+    restart: always
+    environment:
+      MONGO_URI: "mongodb+srv://oop:oop@cluster0.og4urrq.mongodb.net/bancaMovil"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+
+  backend-springboot:
+    build: ./backend-springboot
+    container_name: backend_springboot
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/banca_movil
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+    driver: local

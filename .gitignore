@@ -1,0 +1,46 @@
+# 🏗 Archivos de compilación y dependencias
+/node_modules/
+/build/
+/dist/
+/pubspec.lock
+
+# 🚀 Flutter / Dart
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.dart_tool/
+.metadata
+android/.gradle
+android/.idea
+ios/Flutter/Flutter.podspec
+ios/Flutter/flutter.podspec
+ios/Pods
+ios/.symlinks
+macos/.symlinks
+web/.dart_tool
+web/main.dart.js
+linux/.dart_tool
+windows/.dart_tool
+
+# 🔧 Archivos de configuración de IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# 🐳 Docker
+**/docker-compose.override.yml
+backend/**/target/
+backend/**/logs/
+backend/**/tmp/
+backend/**/.env
+backend/**/node_modules/
+
+# 📝 Archivos sensibles o temporales
+venv/
+*.log
+*.bak
+*.tmp
+*.swp
+*.swo
+.env
